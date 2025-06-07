@@ -6,6 +6,7 @@ Expand-Archive -Path "C:\Program Files\goose.zip" -DestinationPath "C:\Program F
 $s = (New-Object -COM WScript.Shell).CreateShortcut("C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\Goose.lnk")
 $s.TargetPath = "C:\Program Files\goose\GooseDesktop.exe"
 $s.Save()
+Remove-Item "C:\Program Files\goose.zip" -Force
 # Clean up PowerShell history
 Remove-Item "$env:USERPROFILE\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadline\ConsoleHost_history.txt" -ErrorAction SilentlyContinue
 #Delete Script
